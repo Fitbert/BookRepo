@@ -1,0 +1,12 @@
+@testing-library/jest-dom 
+    @testing-library/react
+   @testing-library/user-event
+   bootstrap
+   jwt-decode
+    react
+    react-bootstrap
+    react-dom
+    react-router-dom
+    react-scripts
+    @apollo/client
+    graphql

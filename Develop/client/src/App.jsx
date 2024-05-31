@@ -13,9 +13,6 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-const authLink = createAuthLink({
-  uri: "/graphql",
-});
 
 const authLink = serContect((_, { headers}) => {
 
