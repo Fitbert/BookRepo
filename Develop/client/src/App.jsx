@@ -1,31 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SearchBooks from './pages/searchBooks';
-import SavedBooks from './pages/savedBooks';
-import { ApolloClient, 
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink, 
-} from "@apollo-client";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SearchBooks from './pages/SearchBooks';
+import SavedBooks from './pages/SavedBooks';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import Navbar from './components/Navbar'; // Ensure you have a Navbar component or create one
 
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-
-const authLink = serContect((_, { headers}) => {
-
-// get auth token
-const token = localStorage.getItem('id_token');
-
-//return the headers to the context so httpLink can read them
-return {
-  headers: {
-   ...headers,
-    authorization: token? `Bearer ${token}` : "",
-  },
-};
+const authLink = setContext((_, { headers }) => {
+  // Get the auth token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // Return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
 });
 
 const client = new ApolloClient({
@@ -38,12 +32,12 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={SearchBooks} />
-          <Route exact path="/saved" component={SavedBooks} />
-        <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
-        </Switch>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<SearchBooks />} />
+            <Route path="/saved" element={<SavedBooks />} />
+            <Route path="*" element={<h1 className="display-2">Wrong page!</h1>} />
+          </Routes>
         </>
       </Router>
     </ApolloProvider>
