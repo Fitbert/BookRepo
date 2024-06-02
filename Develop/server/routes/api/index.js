@@ -1,6 +1,9 @@
 const router = require('express').Router();
-const userRoutes = require('./user-routes');
+// Import your user controllers here
 
-router.use('/users', userRoutes);
+// Example user route
+router.get('/', (req, res) => {
+  res.json({ message: 'User route' });
+});
 
 module.exports = router;

@@ -1,10 +1,10 @@
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 // create a new class to instantiate for a user
 class AuthService {
   // get user data
   getProfile() {
-    return jwt_decode(this.getToken());
+    return jwtDecode(this.getToken());
   }
 
   // check if user's logged in
@@ -17,7 +17,7 @@ class AuthService {
   // check if token is expired
   isTokenExpired(token) {
     try {
-      const decoded = jwt_decode(token);
+      const decoded = jwtDecode(token);
       if (decoded.exp < Date.now() / 1000) {
         return true;
       } else return false;
