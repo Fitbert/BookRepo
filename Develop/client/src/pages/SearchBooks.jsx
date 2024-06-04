@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Container,
   Col,
@@ -11,12 +11,8 @@ import {
 import Auth from '../utils/auth';
 import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { useMutation} from '@apollo/client';
-import { SAVE_BOOK } from '../utils/mutations';
-
 
 const SearchBooks = () => {
-  const [saveBook] = useMutation(SAVE_BOOK);
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
@@ -76,19 +72,7 @@ const SearchBooks = () => {
     }
 
     try {
-     // const response = await saveBook(bookToSave, token);
-     const responce = await saveBoook({
-      variables: {
-        input: {
-          authors: bookToSave.authors,
-          description: bookToSave.description,
-          image: bookToSave.image,
-          title: bookToSave.title,
-          bookId: bookToSave.bookId,
-          link: bookToSave.link
-        }
-      }
-     })
+      const response = await saveBook(bookToSave, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
