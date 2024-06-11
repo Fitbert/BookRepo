@@ -3,7 +3,7 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
-
+const require('dotenv')
 const { typeDefs, resolvers } = require('../server/schema');
 const db = require('./config/connection');
 const cors = require('cors')
