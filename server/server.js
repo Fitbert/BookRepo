@@ -3,7 +3,7 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
-require('dotenv').config(); // Corrected dotenv require statement
+require('dotenv').config();
 const { typeDefs, resolvers } = require('../server/schema');
 const db = require('./config/connection');
 const cors = require('cors');
@@ -20,7 +20,6 @@ const server = new ApolloServer({
   resolvers,
 });
 
-// Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
 
@@ -43,10 +42,9 @@ const startApolloServer = async () => {
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`); // Corrected URL to http
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
 };
 
-// Call the async function to start the server
 startApolloServer();
